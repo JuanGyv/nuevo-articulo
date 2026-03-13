@@ -2,6 +2,10 @@
    LAYOUT GENERAL
    ========================================== */
 body {
+    a, button {
+    /* Esto hace que el cuadro azul de los celulares sea 100% transparente */
+    -webkit-tap-highlight-color: transparent; 
+}
     background-color: #171717;
     /* El fondo oscuro de tu diseño */
     color: white;
