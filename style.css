@@ -1,0 +1,202 @@
+/* ==========================================
+   LAYOUT GENERAL
+   ========================================== */
+body {
+    background-color: #171717;
+    /* El fondo oscuro de tu diseño */
+    color: white;
+    /* Por defecto el texto fuera de la tarjeta será blanco */
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+}
+
+.contenedor-layout {
+    max-width: 1100px;
+    /* Limita el ancho para que no se estire infinito en pantallas grandes */
+    margin: 50px auto;
+    /* Centra el contenedor en la pantalla */
+    padding: 0 30px;
+    /* Un margen de seguridad a los lados */
+}
+
+/* ==========================================
+   BOTONES ESTILO "PÍLDORA"
+   ========================================== */
+.boton-pildora {
+    background-color: white;
+    color: #161616;
+    /* Texto oscuro para contrastar */
+    text-decoration: none;
+    padding: 12px 30px;
+    border-radius: 50px;
+    /* Hace el botón completamente redondo de los lados */
+    font-weight: lighter;
+    font-size: 14px;
+    display: inline-block;
+    /* Necesario para que el padding funcione bien en enlaces */
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.boton-pildora:hover {
+    background-color: #e0e0e0;
+    /* Un gris muy clarito al pasar el ratón */
+    transform: scale(1.05);
+    /* Crece un poquito */
+}
+
+/* Alineaciones con Flexbox para los botones superior e inferior */
+.alinear-derecha {
+    display: flex;
+    justify-content: flex-end;
+    /* Empuja el botón a la derecha */
+    margin-bottom: 20px;
+    /* Separa el botón de la tarjeta blanca */
+    opacity: 0;
+    /* Lo ocultamos al inicio */
+    animation: aparecerTarjeta 0.8s ease-out forwards;
+    animation-delay: 0.1s;
+    /* Espera solo una décima de segundo */
+}
+
+.alinear-izquierda {
+    display: flex;
+    justify-content: flex-start;
+    /* Empuja el botón a la izquierda */
+    margin-top: 20px;
+    /* Separa el botón de la tarjeta blanca */
+    opacity: 0;
+    /* Lo ocultamos al inicio */
+    animation: aparecerTarjeta 0.8s ease-out forwards;
+    animation-delay: 0.5s;
+    /* Espera solo una décima de segundo */
+}
+
+/* ==========================================
+   TARJETA BLANCA (Grid)
+   ========================================== */
+.tarjeta-articulo {
+    background-color: white;
+    border-radius: 15px;
+    padding: 40px;
+    color: #171717;
+    /* Texto oscuro dentro de la tarjeta */
+
+    /* El Grid de 2 columnas */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3px;
+    align-items: stretch;
+    /* Hace que ambas columnas midan lo mismo de alto */
+    opacity: 0;
+    /* Empezamos invisible */
+
+    /* El truco: Receta + Duración + Curva + Quedarse visible al final */
+    animation: aparecerTarjeta 0.8s ease-out forwards;
+
+    /* Un pequeño retraso para que el fondo cargue primero (opcional) */
+    animation-delay: 0.3s;
+}
+
+.contenido-texto h2 {
+    margin-top: 0;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.contenido-texto p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #444;
+    margin-bottom: 15px;
+}
+
+.imagen-articulo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Hace que la imagen llene su espacio sin deformarse */
+
+}
+
+/* ==========================================
+   SECCIÓN DE CONTACTO (Footer)
+   ========================================== */
+.seccion-contacto {
+    text-align: center;
+    /* Centra todo el texto y el botón */
+    margin-top: 80px;
+    /* Da mucho espacio respirable arriba */
+    max-width: 600px;
+    /* Evita que el texto de contacto sea muy ancho y difícil de leer */
+    margin-left: auto;
+    /* Centra la caja de contacto */
+    margin-right: auto;
+    /* Centra la caja de contacto */
+    opacity: 0;
+    animation: aparecerTarjeta 0.8s ease-out forwards;
+    animation-delay: 0.7s;
+    /* Es lo último en aparecer */
+}
+
+.seccion-contacto h3 {
+    margin-bottom: 10px;
+}
+
+.seccion-contacto p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #cccccc;
+    /* Un gris claro para el párrafo */
+    margin-bottom: 30px;
+    /* Separa el párrafo de su botón */
+}
+
+/* ==========================================
+   RECETA DE ANIMACIÓN (Keyframes)
+   ========================================== */
+
+@keyframes aparecerTarjeta {
+
+    /* Estado inicial (invisible y abajo) */
+    0% {
+        opacity: 0;
+        /* Completamente transparente */
+        transform: translatex(40px);
+        /* Movido 40px hacia abajo en el eje Y */
+    }
+
+    /* Estado final (visible y en su sitio) */
+    100% {
+        opacity: 1;
+        /* Completamente visible */
+        transform: translatex(0);
+        /* Vuelve a su posición original */
+    }
+}
+
+/* ==========================================
+   DISEÑO RESPONSIVO (Celulares y Tablets)
+   ========================================== */
+
+/* Esta regla solo se activa si la pantalla mide 768px de ancho o menos */
+@media (max-width: 768px) {
+    
+    .tarjeta-articulo {
+        /* ¡El truco maestro! Cambiamos de 2 columnas a 1 sola */
+        grid-template-columns: 1fr; 
+        
+        /* Reducimos un poco los espacios para aprovechar la pantalla pequeña */
+        padding: 25px; 
+        gap: 25px;
+    }
+
+    /* Opcional: Centramos el texto para que se vea mejor en celular */
+    .contenido-texto {
+        text-align: center;
+    }
+
+    /* Opcional: Reducimos un poco el tamaño del título principal */
+    .contenido-texto h2 {
+        font-size: 20px;
+    }
+}
